@@ -70,7 +70,32 @@
     </div>
 </script>
 
-<!-- VIEWS FOR THE "DETAILS VIEWS EXAMPLE" -->
+<script type="text/ng-template" id="bookings.html">
+  <div widget-section-header>Your Appointments</div>
+  <div widget-item>
+    <p>Upcoming Appointments</p>
+    <div class="approvedAppointments" ng-show="approvedAppointments.length">
+      <p>Approved Appointments</p>
+      <div ng-repeat="appointment in approvedAppointments">
+      </div>
+    </div>
+    <div class="pendingAppointments" ng-show="pendingAppointments.length">
+      <p>Pending Appointments</p>
+      <div ng-repeat="appointment in pendingAppointments">
+      </div>
+    </div>
+    <div class="rejectedAppointments" ng-show="rejectedAppointments.length">
+      <p>Rejected Appointments</p>
+      <div ng-repeat="appointment in rejectedAppointments">
+      </div>
+    </div>
+    <div widget-item icon-right="icon-angle-right" ng-click="showView3()" button>
+        <div widget-text>Book an Appointment</div>
+        <div widget-sub-text>Holder Text</div>
+    </div>
+  </div>
+</script>
+<!-- Views for the Admin Console -->
 
 <script type="text/ng-template" id="admin.html">
     <div widget-section-header>Admin Console</div>
@@ -82,7 +107,7 @@
       <option value="audi">Audi</option>
     </select>
       </div>
-    <div widget-item icon-right="icon-angle-right" ng-click="showView3()" button>
+    <div widget-item icon-right="icon-angle-right" ng-click="showTimeslots()" button>
         <div widget-text>This view is displayed in column 2</div>
         <div widget-sub-text>Click here to show view 3 in column 3</div>
     </div>
