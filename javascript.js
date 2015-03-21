@@ -95,7 +95,6 @@ angular.module('PortalApp')
       	$scope.studentAcademic = studentAcademic;
       	console.log($scope.studentAcademic);
     });   	
-  	
 
     // Views
     $scope.showAdmin = function () {
