@@ -50,7 +50,7 @@ angular.module('PortalApp')
 
     // DETAILS VIEW EXAMPLE
     $scope.showView2 = function () {
-        $scope.portalHelpers.showView('view2.html', 2);
+        $scope.portalHelpers.showView('admin.html', 2);
     }
 
     $scope.showView3 = function () {
