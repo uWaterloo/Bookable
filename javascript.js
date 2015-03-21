@@ -48,32 +48,38 @@ angular.module('PortalApp')
         }
     };
   
-  	// Get Student info
-  	$http.get("/Develop/GetStudentInfo", {}).then(function(student){
-      	$scope.student = student.data.Data;
-      	console.log($scope.student);
-    });
-  
-  
   	// Supporting functions for bookings
   	$scope.getAppointments = function(){
-     	$scope.portalHelpers.invokeServerFunction("getAppointments", 0)
+     	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", $scope.student.UserId, 0)
         .then(function(appointments){
         	$scope.pendingAppointments = appointments;
           	console.log($scope.pendingAppointments);
         });
-      	$scope.portalHelpers.invokeServerFunction("getAppointments", 1)
+      	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", $scope.student.UserId, 1)
         .then(function(appointments){
         	$scope.rejectedAppointments = appointments;
           	console.log($scope.rejectedAppointments);
         });
-      	$scope.portalHelpers.invokeServerFunction("getAppointments", 2)
+      	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", $scope.student.UserId, 2)
         .then(function(appointments){
         	$scope.approvedAppointments = appointments;
           	console.log($scope.approvedAppointments);
         });
     };
-  	$scope.getAppointments();
+  
+  	// Get Student info
+  	$http.get("/Develop/GetStudentInfo", {}).then(function(student){
+      	$scope.student = student.data.Data;
+      	console.log($scope.student);
+      	$scope.getAppointments();
+    });
+  	
+  	$http.get("/Develop/GetStudentAcademicInfo", {}).then(function(studentAcademic){
+      	$scope.studentAcademic = studentAcademic;
+      	console.log($scope.studentAcademic);
+    });
+   	
+  	
 
     // Views
     $scope.showAdmin = function () {
