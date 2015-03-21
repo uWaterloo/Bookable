@@ -62,6 +62,7 @@
         </div>
     </div>
 </script>
+<!-- Bookings HTML (List of current appointments) -->
 
 <script type="text/ng-template" id="bookings.html">
   <div widget-section-header>Your Appointments</div>
@@ -81,6 +82,10 @@
       <div ng-repeat="appointment in rejectedAppointments">
       </div>
     </div>
+    <div class="noAppointments" ng-hide="approvedAppointments.length || pendingAppointments.length || rejectedAppointments.length">
+      <p>You don't have any appointments! You can book one below.</p>
+    </div>
+    <div widget-section-header>Book An Appointment</div>
     <div widget-item icon-right="icon-angle-right" ng-click="showTimeslots()" button>
         <div widget-text>Book an Appointment</div>
         <div widget-sub-text>Holder Text</div>
@@ -93,6 +98,11 @@
 
   </div>
 </script>
+
+<!-- View for the timeslot screen -->
+<script type="text/ng-template" id="timeslots.html">
+</script>
+
 <!-- Views for the Admin Console -->
 
 <script type="text/ng-template" id="admin.html">
