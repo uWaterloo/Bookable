@@ -67,6 +67,23 @@ angular.module('PortalApp')
         });
     };
   
+  	$scope.makeAppointment = function(){
+      	//Create appointment JSON
+      	var appointment = {
+          	userName: $scope.student.FirstName + " " + $scope.student.LastName,
+          	userId: $scope.student.UserId,
+          	dateTime: this.dateTime,
+          	resourceId: $scope.resourceId,
+          	resourceName: this.resourceName,
+          	staffName: $scope.staffName,
+          	staffId: this.staffId,
+          	status: 0          	
+        }
+        //Save the appointment
+        $scope.portalHelpers.invokeServerFunction("makeAppointment", appointment)
+        .then(function(){});
+    };
+  
   	// Get Student info
   	$http.get("/Develop/GetStudentInfo", {}).then(function(student){
       	$scope.student = student.data.Data;
@@ -77,8 +94,7 @@ angular.module('PortalApp')
   	$http.get("/Develop/GetStudentAcademicInfo", {}).then(function(studentAcademic){
       	$scope.studentAcademic = studentAcademic;
       	console.log($scope.studentAcademic);
-    });
-   	
+    });   	
   	
 
     // Views
@@ -89,10 +105,15 @@ angular.module('PortalApp')
     $scope.showView3 = function () {
         $scope.portalHelpers.showView('view3.html', 3);
     }
+    $scope.showResources = function() {
+      	$scope.portalHelpers.showView('resources.html', 2);
+    }
+
     
     $scope.showTimeslots = function() {
-      	$scope.portalHelpers.showView('timeslots.html', 2);
+      	$scope.portalHelpers.showView('timeslots.html', 3);
     }
+    
 
     // PORTAL DATA SOURCE EXAMPLE
 
