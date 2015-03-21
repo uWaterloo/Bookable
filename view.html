@@ -135,15 +135,10 @@
 <script type="text/ng-template" id="admin.html">
     <div widget-section-header>Admin Console</div>
   	<div widget-item widget-text>Select faculty service:
-	<select>
-<<<<<<< HEAD
-      <option value="volvo">Volvo</option>
-=======
-      <option value="Health Services">Volvo</option>
->>>>>>> design
-      <option value="saab">Saab</option>
-      <option value="mercedes">Mercedes</option>
-      <option value="audi">Audi</option>
+	<select class="form-control" ng-model="resourceId" ng-change="getStaffForResource()">
+      <option value="0">Health Services</option>
+      <option value="1">Counselling Services</option>
+      <option value="2">Professors and TAs</option>
     </select>
       </div>
     <div widget-item icon-right="icon-angle-right" ng-click="showView3()" button>
