@@ -10,6 +10,27 @@ function getData() {
     return queryResult;
 }
 
+// Retreive data from the database for a given user ID
+function getBookingsForUserId(userId) {
+  //Todo: hide bookings in the past
+    var queryResult = db.Execute('SELECT * FROM Appointments WHERE userId =' + userId);
+    var rows = JSON.parse(queryResult);
+    if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
+        return '{"error":"No results"}';
+    }
+    return queryResult;
+}
+
+// Retreive data from the database for a given faculty ID
+function getBookingsForFacultyId(ressourceId) {
+    var queryResult = db.Execute('SELECT * FROM Appointments WHERE ressourceId =' + facultyId);
+    var rows = JSON.parse(queryResult);
+    if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
+        return '{"error":"No results"}';
+    }
+    return queryResult;
+}
+
 // Create talbe
 function createTable() {
     var debug = {};
