@@ -11,9 +11,11 @@ function getData() {
 }
 
 // Retreive data from the database for a given user ID
-function getBookingsForUserId(userId) {
+function getAppointmentsForUserId() {
   //Todo: hide bookings in the past
-    var queryResult = db.Execute('SELECT * FROM Appointments WHERE userId =' + userId);
+    var userId = args.Get("userId");
+  var state = args.Get("state");
+    var queryResult = db.Execute('SELECT * FROM Appointments WHERE userId = ' + userId + ' AND  state = ' + state);
     var rows = JSON.parse(queryResult);
     if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
         return '{"error":"No results"}';
@@ -22,8 +24,31 @@ function getBookingsForUserId(userId) {
 }
 
 // Retreive data from the database for a given faculty ID
-function getBookingsForFacultyId(ressourceId) {
-    var queryResult = db.Execute('SELECT * FROM Appointments WHERE ressourceId =' + facultyId);
+function getAppointmentsForFacultyId() {
+  var ressourceId = args.Get("ressourceId");
+  var state = args.Get("state");
+    var queryResult = db.Execute('SELECT * FROM Appointments WHERE facultyId = ' + userId + ' AND  state = ' + state);
+    var rows = JSON.parse(queryResult);
+    if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
+        return '{"error":"No results"}';
+    }
+    return queryResult;
+}
+
+// Retreive data from the database for a given faculty ID
+function setState() {
+    var Id = args.Get("Id");
+  var state = args.Get("state");
+    var queryResult = db.Execute('UPDATE Appointments SET state = ' + state + ' WHERE _id = '+ Id);
+    var rows = JSON.parse(queryResult);
+    if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
+        return '{"error":"No results"}';
+    }
+    return queryResult;
+}
+// Retreive data from the database for a given faculty ID
+function makeAppointment() {
+    var queryResult = db.Execute("INSERT INTO Appointments VALUES(0, GETDATE(), @currentUser, @studentName, -1, @ressourceName', @staffName, '-1', @comments)");
     var rows = JSON.parse(queryResult);
     if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
         return '{"error":"No results"}';
