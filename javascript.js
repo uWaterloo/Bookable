@@ -6,7 +6,7 @@ angular.module('PortalApp')
 
     // Widget Configuration
     $scope.portalHelpers.config = {
-        "title": "Test Project",
+        "title": "Bookable",
         "icon": "icon-bell"
     };
 
@@ -48,7 +48,7 @@ angular.module('PortalApp')
         }
     };
 
-    // DETAILS VIEW EXAMPLE
+    // Views
     $scope.showAdmin = function () {
         $scope.portalHelpers.showView('admin.html', 2);
     }
