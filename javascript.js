@@ -6,7 +6,7 @@ angular.module('PortalApp')
 
     // Widget Configuration
     $scope.portalHelpers.config = {
-        "title": "Test Project",
+        "title": "Bookable",
         "icon": "icon-bell"
     };
 
@@ -142,9 +142,18 @@ angular.module('PortalApp')
     };
 }])
 // Custom filter example
-.filter('FilterName', function () {
-    return function (input, arg1, arg2) {
-        var output = input;
+.filter('timeFilter', function () {
+    return function (input) {
+        var output = input.Hours;
+      	if (output < 10)
+          	output = "0" + output;
+      	output += ":";
+      	if (input.Minutes < 10){
+          	output += "0" + input.Minutes;
+        }
+      	else{
+          output += input.Minutes;
+        }
         return output;
     }
 });
