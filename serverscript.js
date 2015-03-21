@@ -48,14 +48,20 @@ function setStatus() {
 }
 // Make appointment
 function makeAppointment() {
-    var queryResult = db.Execute("INSERT INTO Appointments VALUES(0, @date_day, @date_time, @currentUser, @studentName, -1, @resourceName, @staffName, '-1', @comments)");
+    var queryResult = db.Execute("INSERT INTO Appointments VALUES(0, @date, @day, @currentUser, @studentName, -1, @ressourceName', @staffName, '-1', @comments)");
     var rows = JSON.parse(queryResult);
+    if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
+        return '{"error":"No results"}';
+    }
     return queryResult;
 }
 
 // get time slot
 function getOccupiedTimeSlots() {
-    var queryResult = db.Execute("SELECT date_time FROM Appointments WHERE date_day = @date, date_time = @time AND status = 2 AND staffId = @staffId");
+  var date = args.Get("date");
+  var staffName = args.Get("staffName");
+  
+    var queryResult = db.Execute("SELECT date_time FROM Appointments WHERE date_day = " + staffName + " AND status = 2 AND staffName = " + staffName);
     var rows = JSON.parse(queryResult);
     if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
         return '{"error":"No results"}';
