@@ -55,39 +55,37 @@
     <option value="Jane Doe">Jane Doe</option>
     <option value="Stephen Harper">Stephen Harper</option>
   </select>
-  <div widget-item icon-right="icon-angle-right" ng-click="showTimeslots()" button ng-hide="appointment.staffName === undefined">
-        <div widget-text>Book an Appointment with {{staffName}}</div>
+  <div widget-section-header>Timeslots</div>
+	<select class="form-control" ng-model="appointment.month">
+      <option value="0">January</option>
+      <option value="1">February</option>
+      <option value="2">March</option>
+      <option value="3">April</option>
+      <option value="4">May</option>
+      <option value="5">June</option>
+      <option value="6">July</option>
+      <option value="7">August</option>
+      <option value="8">September</option>
+      <option value="9">October</option>
+      <option value="10">November</option>
+      <option value="11">December</option>
+    </select>
+  	<select class="form-control" ng-model="appointment.day" ng-hide="appointment.month === undefined">
+      <option value="{{$index+1}}" ng-repeat="i in getNumber(31) track by $index">{{$index+1}}</option>
+    </select>
+    <select class="form-control" ng-model="appointment.time" ng-hide="appointment.day === undefined">
+      <option value="{{$index+1}}:00" ng-repeat="i in getNumber(24) track by $index">{{$index+1}}:00</option>
+    </select>
+  <input type="text" ng-model="appointment.comments" value="Nothing"/>
+    <div widget-item icon-right="icon-angle-right" ng-click="makeAppointment(appointment)" button>
+        <div widget-text>Book appointment</div>
         <div widget-sub-text>Holder Text</div>
   </div>
 </script>
 
 <!-- View for the timeslot screen -->
 <script type="text/ng-template" id="timeslots.html">
-      <div widget-section-header>Timeslots</div>
-	<select class="form-control" ng-model="appointment.month">
-      <option value="1">January</option>
-      <option value="2">February</option>
-      <option value="3">March</option>
-      <option value="4">April</option>
-      <option value="5">May</option>
-      <option value="6">June</option>
-      <option value="7">July</option>
-      <option value="8">August</option>
-      <option value="9">September</option>
-      <option value="10">October</option>
-      <option value="11">November</option>
-      <option value="12">December</option>
-    </select>
-  	<select class="form-control" ng-model="appointment.day" ng-hide="appointment.month === undefined">
-      <option value="{{$index+1}}" ng-repeat="i in getNumber(31) track by $index">{{$index+1}}</option>
-    </select>
-    <select class="form-control" ng-model="appointment.time" ng-hide="appointment.day === undefined">
-      <option value="{{$index+1}}" ng-repeat="i in allTimes">{{i}}:00</option>
-    </select>
-    <div widget-item icon-right="icon-angle-right" ng-click="makeAppointment()" button ng-hide="appointment.time === undefined">
-        <div widget-text>Book appointment</div>
-        <div widget-sub-text> </div>
-  </div>
+      
   
 </script>
 
