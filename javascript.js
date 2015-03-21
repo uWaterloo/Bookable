@@ -56,6 +56,10 @@ angular.module('PortalApp')
     $scope.showView3 = function () {
         $scope.portalHelpers.showView('view3.html', 3);
     }
+    
+    $scope.showTimeslots = function() {
+      	$scope.portalHelpers.showView('timeslots.html', 2);
+    }
 
     // PORTAL DATA SOURCE EXAMPLE
 
