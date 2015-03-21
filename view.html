@@ -92,22 +92,31 @@
 
 <script type="text/ng-template" id="admin.html">
     <div widget-section-header>Admin Console</div>
-  	<div widget-item widget-text>Select faculty service:
+  <div widget-item widget-text>Select faculty service: </div>
 	<select class="form-control" ng-model="resourceId" ng-change="getStaffForResource()">
       <option value="0">Health Services</option>
       <option value="1">Counselling Services</option>
       <option value="2">Professors and TAs</option>
     </select>
-      </div>
-    <div widget-item icon-right="icon-angle-right" ng-click="showView3()" button>
-        <div widget-text>This view is displayed in column 2</div>
-        <div widget-sub-text>Click here to show view 3 in column 3</div>
+        <select class="form-control" ng-model="staffName" ng-hide="resourceId === undefined">
+      <option value = "John Doe">John Doe</option>
+      <option value="Jane Doe">Jane Doe</option>
+      <option value="Stephen Harper">Stephen Harper</option>
+    </select>
+    <div widget-item icon-right="icon-angle-right" ng-click="showView3()" button ng-hide="staffName === undefined">
+        <div widget-text>View the Appointments for {{staffName}}</div>
+        <div widget-sub-text>Click Here to view Time Slots</div>
     </div>
 </script>
 
 <script type="text/ng-template" id="view3.html">
-    <div widget-section-header>View 3</div>
+    <div widget-section-header ng-init="getAdminAppointments()">Schedule</div>
     <div widget-item>
-        <div widget-text>This view is displayed in column 3</div>
+     <div ng-repeat="appointment in pendingAdminAppointments">		
+        <p>Appointment with {{appointment.studentName}} on {{appointment.dateTime}}</p>		
+      </div>
+	 <div ng-repeat="appointment in approvedAdminAppointments">		
+        <p>Appointment with {{appointment.studentName}} on {{appointment.dateTime}}</p>		
+      </div>
     </div>
 </script>

@@ -71,6 +71,19 @@ $scope.getNumber = function(num) {
         });
     };
   
+    // Supporting functions for bookings
+  	$scope.getAdminAppointments = function(){
+     	$scope.portalHelpers.invokeServerFunction("getAppointmentsForFacultyId", {userId:$scope.student.UserId, status:0})
+        .then(function(appointments){
+        	$scope.pendingAdminAppointments = appointments;
+          	console.log($scope.pendingAppointments);
+        });
+      	$scope.portalHelpers.invokeServerFunction("getAppointmentsForFacultyId", {userId:$scope.student.UserId, status:2})
+        .then(function(appointments){
+        	$scope.approvedAdminAppointments = appointments;
+          	console.log($scope.approvedAppointments);
+        });
+    };
   	$scope.makeAppointment = function(app){
       var date = "2015-" + app.month +"-"+ app.day;
       	//Create appointment JSON
