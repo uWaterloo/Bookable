@@ -48,7 +48,55 @@ angular.module('PortalApp')
         }
     };
 
-    // DETAILS VIEW EXAMPLE
+  
+  	// Supporting functions for bookings
+  	$scope.getAppointments = function(){
+     	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", {userId:$scope.student.UserId, status:0})
+        .then(function(appointments){
+        	$scope.pendingAppointments = appointments;
+          	console.log($scope.pendingAppointments);
+        });
+      	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", {userId:$scope.student.UserId, status:1})
+        .then(function(appointments){
+        	$scope.rejectedAppointments = appointments;
+          	console.log($scope.rejectedAppointments);
+        });
+      	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", {userId:$scope.student.UserId, status:2})
+        .then(function(appointments){
+        	$scope.approvedAppointments = appointments;
+          	console.log($scope.approvedAppointments);
+        });
+    };
+  
+  	$scope.makeAppointment = function(){
+      	//Create appointment JSON
+      	var appointment = {
+          	userName: $scope.student.FirstName + " " + $scope.student.LastName,
+          	userId: $scope.student.UserId,
+          	dateTime: this.dateTime,
+          	resourceId: $scope.resourceId,
+          	resourceName: this.resourceName,
+          	staffName: $scope.staffName,
+          	staffId: this.staffId,
+          	status: 0          	
+        }
+        //Save the appointment
+        $scope.portalHelpers.invokeServerFunction("makeAppointment", appointment)
+        .then(function(){});
+    };
+  
+  	// Get Student info
+  	$http.get("/Develop/GetStudentInfo", {}).then(function(student){
+      	$scope.student = student.data.Data;
+      	console.log($scope.student);
+      	$scope.getAppointments();
+    });
+  	
+  	$http.get("/Develop/GetStudentAcademicInfo", {}).then(function(studentAcademic){
+      	$scope.studentAcademic = studentAcademic;
+      	console.log($scope.studentAcademic);
+    });   	
+
     $scope.showAdmin = function () {
         $scope.portalHelpers.showView('admin.html', 2);
     }
