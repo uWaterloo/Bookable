@@ -111,7 +111,7 @@
 </script>
 
 <script type="text/ng-template" id="view3.html">
-    <div widget-section-header>Schedule</div>
+    <div widget-section-header ng-init="getAdminAppointments()">Schedule</div>
     <div widget-item>
      <div ng-repeat="appointment in pendingAdminAppointments">		
         <p>Appointment with {{appointment.studentName}} on {{appointment.dateTime}}</p>		
