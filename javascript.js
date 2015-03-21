@@ -50,17 +50,17 @@ angular.module('PortalApp')
   
   	// Supporting functions for bookings
   	$scope.getAppointments = function(){
-     	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", $scope.student.UserId, 0)
+     	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", {userId:$scope.student.UserId, status:0})
         .then(function(appointments){
         	$scope.pendingAppointments = appointments;
           	console.log($scope.pendingAppointments);
         });
-      	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", $scope.student.UserId, 1)
+      	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", {userId:$scope.student.UserId, status:1})
         .then(function(appointments){
         	$scope.rejectedAppointments = appointments;
           	console.log($scope.rejectedAppointments);
         });
-      	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", $scope.student.UserId, 2)
+      	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", {userId:$scope.student.UserId, status:2})
         .then(function(appointments){
         	$scope.approvedAppointments = appointments;
           	console.log($scope.approvedAppointments);
