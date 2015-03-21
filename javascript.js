@@ -70,7 +70,7 @@ angular.module('PortalApp')
         // Turn off loading animation
         $scope.portalHelpers.toggleLoading(false);
         // Show main view
-        $scope.portalHelpers.showView('main.html', 1);
+        $scope.portalHelpers.showView('bookings.html', 1);
     });
 
     // OPEN API EXAMPLE
