@@ -10,21 +10,21 @@
   <div widget-section-header>Your Appointments</div>		
   <div widget-item>		
     <div class="approvedAppointments" ng-show="approvedAppointments.length">		
-      <p>Approved Appointments</p>		
+      <p widget-section-header>Approved Appointments</p>		
       <div ng-repeat="appointment in approvedAppointments">		
-        <p>Appointment with {{appointment.staffName}} on {{appointment.dateTime}}</p>		
+        <p>Appointment with {{appointment.staffName}} on {{appointment.date_day}} at {{appointment.date_time | timeFilter}}</p>		
      </div>		
     </div>		
     <div class="pendingAppointments" ng-show="pendingAppointments.length">		
-      <p>Pending Appointments</p>		
+      <p widget-section-header>Pending Appointments</p>		
       <div ng-repeat="appointment in pendingAppointments">		
-        <p>Appointment with {{appointment.staffName}} on {{appointment.dateTime}}</p>		
+        <p>Appointment with {{appointment.staffName}} on {{appointment.date_day}} at {{appointment.date_time | timeFilter}}</p>		
       </div>		
     </div>		
     <div class="rejectedAppointments" ng-show="rejectedAppointments.length">		
-      <p>Rejected Appointments</p>		
+      <p widget-section-header>Cancelled Appointments</p>		
      <div ng-repeat="appointment in rejectedAppointments">		
-        <p>Appointment with {{appointment.staffName}} on {{appointment.dateTime}}</p>		
+        <p>Appointment with {{appointment.staffName}} on {{appointment.date_day}} at {{appointment.date_time | timeFilter}}</p>		
       </div>		
     </div>		
     <div class="noAppointments" ng-hide="approvedAppointments.length || pendingAppointments.length || rejectedAppointments.length">		
@@ -32,13 +32,14 @@
     </div>		
     <div widget-section-header>Book An Appointment</div>		
     <div widget-item icon-right="icon-angle-right" ng-click="showResources()" button>		
-        <div widget-text>Choose a Staff</div>		
-        <div widget-sub-text>Holder Text</div>		
+
+        <div widget-text>Choose a Staff Member</div>		
+        <div widget-sub-text>   </div>		
     </div>		
     <div widget-section-header>Administration Console</div>		
     <div widget-item icon-right="icon-angle-right" ng-click="showAdmin()" button>		
         <div widget-text>Administration Console</div>		
-        <div widget-sub-text>Holder Text</div>		
+        <div widget-sub-text>   </div>		
     </div>		
   </div>		
 </script>
@@ -85,8 +86,6 @@
 
 <!-- View for the timeslot screen -->
 <script type="text/ng-template" id="timeslots.html">
-      
-  
 </script>
 
 <!-- VIEWS FOR THE "DETAILS VIEWS EXAMPLE" -->
