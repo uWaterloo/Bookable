@@ -100,6 +100,10 @@ angular.module('PortalApp')
     $scope.showAdmin = function () {
         $scope.portalHelpers.showView('admin.html', 2);
     }
+    
+    $scope.showResources = function () {
+        $scope.portalHelpers.showView('resources.html', 2);
+    }
 
     $scope.showView3 = function () {
         $scope.portalHelpers.showView('view3.html', 3);
@@ -114,7 +118,7 @@ angular.module('PortalApp')
         // Turn off loading animation
         $scope.portalHelpers.toggleLoading(false);
         // Show main view
-        $scope.portalHelpers.showView('main.html', 1);
+        $scope.portalHelpers.showView('bookings.html', 1);
     });
 
     // OPEN API EXAMPLE
