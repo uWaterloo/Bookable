@@ -27,7 +27,7 @@ function getAppointmentsForUserId() {
 function getAppointmentsForFacultyId() {
   var ressourceId = args.Get("ressourceId");
   var state = args.Get("status");
-    var queryResult = db.Execute('SELECT * FROM Appointments WHERE staffId = ' + userId + ' AND  status = ' + state);
+    var queryResult = db.Execute('SELECT * FROM Appointments WHERE staffId = ' + staffId + ' AND  status = ' + state);
     var rows = JSON.parse(queryResult);
     if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
         return '{"error":"No results"}';
@@ -48,11 +48,8 @@ function setStatus() {
 }
 // Make appointment
 function makeAppointment() {
-    var queryResult = db.Execute("INSERT INTO Appointments VALUES(0, GETDATE(), @currentUser, @studentName, -1, @ressourceName', @staffName, '-1', @comments)");
+    var queryResult = db.Execute("INSERT INTO Appointments VALUES(0, @date_day, @date_time, @currentUser, @studentName, -1, @resourceName, @staffName, '-1', @comments)");
     var rows = JSON.parse(queryResult);
-    if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
-        return '{"error":"No results"}';
-    }
     return queryResult;
 }
 
