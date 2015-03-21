@@ -6,7 +6,7 @@ angular.module('PortalApp')
 
     // Widget Configuration
     $scope.portalHelpers.config = {
-        "title": "Bookable",
+        "title": "Test Project",
         "icon": "icon-bell"
     };
 
@@ -36,7 +36,7 @@ angular.module('PortalApp')
             $scope.getDbData();
         });
     }
-
+    
     // Insert a value into the database
     $scope.insertData = function () {
         if ($scope.insertValue.value.length > 50)
@@ -47,7 +47,10 @@ angular.module('PortalApp')
             });
         }
     };
-
+$scope.number = 5;
+$scope.getNumber = function(num) {
+    return new Array(num);   
+}
   
   	// Supporting functions for bookings
   	$scope.getAppointments = function(){
@@ -68,21 +71,26 @@ angular.module('PortalApp')
         });
     };
   
-  	$scope.makeAppointment = function(){
+  	$scope.makeAppointment = function(app){
+      var date = "2015-" + app.month +"-"+ app.day;
       	//Create appointment JSON
       	var appointment = {
-          	userName: $scope.student.FirstName + " " + $scope.student.LastName,
-          	userId: $scope.student.UserId,
-          	dateTime: this.dateTime,
-          	resourceId: $scope.resourceId,
-          	resourceName: this.resourceName,
-          	staffName: $scope.staffName,
-          	staffId: this.staffId,
-          	status: 0          	
+          	studentName: $scope.student.FirstName + " " + $scope.student.LastName,
+          	studentId: $scope.student.UserId,
+          	date_Day: date,
+          	date_Time: app.time,
+          	resourceId: app.resourceId,
+          	resourceName: "Something",
+          	staffName: app.staffName,
+          	staffId: "-1",
+          	status: 0 ,
+          	comments: app.comments
         }
+        console.log(appointment);
         //Save the appointment
         $scope.portalHelpers.invokeServerFunction("makeAppointment", appointment)
-        .then(function(){});
+        .then(function(log){
+        console.log(log)});
     };
   
   	// Get Student info
@@ -105,7 +113,8 @@ angular.module('PortalApp')
         $scope.portalHelpers.showView('resources.html', 2);
     }
     
-    $scope.showTimeslots = function () {
+    $scope.showTimeslots = function (app) {
+      $scope.appointment = app;
         $scope.portalHelpers.showView('timeslots.html', 2);
     }
 
@@ -142,18 +151,9 @@ angular.module('PortalApp')
     };
 }])
 // Custom filter example
-.filter('timeFilter', function () {
-    return function (input) {
-        var output = input.Hours;
-      	if (output < 10)
-          	output = "0" + output;
-      	output += ":";
-      	if (input.Minutes < 10){
-          	output += "0" + input.Minutes;
-        }
-      	else{
-          output += input.Minutes;
-        }
+.filter('FilterName', function () {
+    return function (input, arg1, arg2) {
+        var output = input;
         return output;
     }
 });
