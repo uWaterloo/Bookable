@@ -25,7 +25,7 @@ function getAppointmentsForUserId() {
 
 // Retreive data from the database for a given faculty ID
 function getAppointmentsForFacultyId() {
-  var ressourceId = args.Get("ressourceId");
+  var resourceId = args.Get("resourceId");
   var state = args.Get("status");
     var queryResult = db.Execute('SELECT * FROM Appointments WHERE staffId = ' + userId + ' AND  status = ' + state);
     var rows = JSON.parse(queryResult);
@@ -64,7 +64,7 @@ function createTable() {
     var row = JSON.parse(queryResult);
 
     if (row.length > 0 && typeof row[0].Error != 'undefined') {
-        db.Execute("CREATE TABLE Appointments ( appointmentId INTEGER PRIMARY KEY IDENTITY(1,1), status INTEGER, date_time DATETIME,studentId VARCHAR (12), studentName VARCHAR (60), ressourceId VARCHAR (25), ressourceName VARCHAR (25), staffName VARCHAR (60), staffId VARCHAR (12), comments text)");
+        db.Execute("CREATE TABLE Appointments ( appointmentId INTEGER PRIMARY KEY IDENTITY(1,1), status INTEGER, date_time DATETIME,studentId VARCHAR (12), studentName VARCHAR (60), resourceId VARCHAR (25), resourceName VARCHAR (25), staffName VARCHAR (60), staffId VARCHAR (12), comments text)");
         debug.result = "created table!";
     } else
         debug.result = "table already exists";
