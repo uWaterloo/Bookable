@@ -45,25 +45,17 @@
 
 <script type="text/ng-template" id="resources.html">
   <div widget-section-header>Choose a Staff Member</div>
-  <select class="form-control" ng-model="resourceId" ng-change="getStaffForResource()">
+  <select class="form-control" ng-model="appointment.resourceId" ng-change="getStaffForResource()">
     <option value="0">Health Services</option>
     <option value="1">Counselling Services</option>
     <option value="2">Professors and TAs</option>
   </select>
-  <select class="form-control" ng-model="staffName" ng-hide="resourceId === undefined">
+  <select class="form-control" ng-model="appointment.staffName" ng-hide="appointment.resourceId === undefined">
     <option value = "John Doe">John Doe</option>
     <option value="Jane Doe">Jane Doe</option>
     <option value="Stephen Harper">Stephen Harper</option>
   </select>
-  <div widget-item icon-right="icon-angle-right" ng-click="showTimeslots()" button ng-hide="staffName === undefined">
-        <div widget-text>Book an Appointment with {{staffName}}</div>
-        <div widget-sub-text>Holder Text</div>
-  </div>
-</script>
-
-<!-- View for the timeslot screen -->
-<script type="text/ng-template" id="timeslots.html">
-      <div widget-section-header>Timeslots</div>
+  <div widget-section-header>Timeslots</div>
 	<select class="form-control" ng-model="appointment.month">
       <option value="0">January</option>
       <option value="1">February</option>
@@ -82,12 +74,18 @@
       <option value="{{$index+1}}" ng-repeat="i in getNumber(31) track by $index">{{$index+1}}</option>
     </select>
     <select class="form-control" ng-model="appointment.time" ng-hide="appointment.day === undefined">
-      <option value="{{$index+1}}" ng-repeat="i in getNumber(24) track by $index">{{$index+1}}:00</option>
+      <option value="{{$index+1}}:00" ng-repeat="i in getNumber(24) track by $index">{{$index+1}}:00</option>
     </select>
-    <div widget-item icon-right="icon-angle-right" ng-click="save()">
+  <input type="text" ng-model="appointment.comments" value="Nothing"/>
+    <div widget-item icon-right="icon-angle-right" ng-click="makeAppointment(appointment)" button>
         <div widget-text>Book appointment</div>
         <div widget-sub-text>Holder Text</div>
   </div>
+</script>
+
+<!-- View for the timeslot screen -->
+<script type="text/ng-template" id="timeslots.html">
+      
   
 </script>
 
