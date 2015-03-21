@@ -49,16 +49,31 @@ angular.module('PortalApp')
     };
   
   	// Get Student info
-  	$http.get("/Develop/GetStudentInfo").then(function(student){
-      	$scope.student = student;
+  	$http.get("/Develop/GetStudentInfo", {}).then(function(student){
+      	$scope.student = student.data.Data;
       	console.log($scope.student);
     });
   
   
   	// Supporting functions for bookings
   	$scope.getAppointments = function(){
-     	$scope.portalHelpers.invokeServerFunction("getAppointments", 0,  
-    }
+     	$scope.portalHelpers.invokeServerFunction("getAppointments", 0)
+        .then(function(appointments){
+        	$scope.pendingAppointments = appointments;
+          	console.log($scope.pendingAppointments);
+        });
+      	$scope.portalHelpers.invokeServerFunction("getAppointments", 1)
+        .then(function(appointments){
+        	$scope.rejectedAppointments = appointments;
+          	console.log($scope.rejectedAppointments);
+        });
+      	$scope.portalHelpers.invokeServerFunction("getAppointments", 2)
+        .then(function(appointments){
+        	$scope.approvedAppointments = appointments;
+          	console.log($scope.approvedAppointments);
+        });
+    };
+  	$scope.getAppointments();
 
     // Views
     $scope.showAdmin = function () {
