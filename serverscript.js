@@ -15,7 +15,7 @@ function getAppointmentsForUserId() {
   //Todo: hide bookings in the past
     var userId = args.Get("userId");
   var state = args.Get("status");
-    var queryResult = db.Execute('SELECT * FROM Appointments WHERE studentId = ' + userId + ' AND status = ' + state);
+    var queryResult = db.Execute('SELECT * FROM Appointments WHERE studentId = @currentUser AND status = ' + state);
     var rows = JSON.parse(queryResult);
     if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
         return '{"error":"No results"}';
@@ -25,8 +25,7 @@ function getAppointmentsForUserId() {
 
 // Retreive data from the database for a given faculty ID
 function getAppointmentsForFacultyId() {
-
-  var resourceId = args.Get("resourceId");
+  var ressourceId = args.Get("ressourceId");
   var state = args.Get("status");
     var queryResult = db.Execute('SELECT * FROM Appointments WHERE staffId = ' + userId + ' AND  status = ' + state);
     var rows = JSON.parse(queryResult);
@@ -36,8 +35,8 @@ function getAppointmentsForFacultyId() {
     return queryResult;
 }
 
-// Retreive data from the database for a given faculty ID
-function setState() {
+// Set appointment status
+function setStatus() {
     var Id = args.Get("appointmentId");
   var state = args.Get("status");
     var queryResult = db.Execute('UPDATE Appointments SET status = ' + state + ' WHERE appointmentId = '+ Id);
@@ -47,9 +46,7 @@ function setState() {
     }
     return queryResult;
 }
-
 // Make appointment
-
 function makeAppointment() {
     var queryResult = db.Execute("INSERT INTO Appointments VALUES(0, GETDATE(), @currentUser, @studentName, -1, @ressourceName', @staffName, '-1', @comments)");
     var rows = JSON.parse(queryResult);
@@ -59,9 +56,9 @@ function makeAppointment() {
     return queryResult;
 }
 
-
-function getTimeSlot() {
-    var queryResult = db.Execute("INSERT INTO Appointments VALUES(0, @date_day, @date_time, @currentUser, @studentName, -1, @resourceName', @staffName, '-1', @comments)");
+// get time slot
+function getOccupiedTimeSlots() {
+    var queryResult = db.Execute("SELECT date_time FROM Appointments WHERE date_day = @date, date_time = @time AND status = 2 AND staffId = @staffId");
     var rows = JSON.parse(queryResult);
     if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
         return '{"error":"No results"}';
@@ -78,7 +75,6 @@ function createTable() {
 
     if (row.length > 0 && typeof row[0].Error != 'undefined') {
         db.Execute("CREATE TABLE Appointments ( appointmentId INTEGER PRIMARY KEY IDENTITY(1,1), status INTEGER,date_day DATE,date_time TIME,studentId VARCHAR (12), studentName VARCHAR (60), resourceId VARCHAR (25), resourceName VARCHAR (25), staffName VARCHAR (60), staffId VARCHAR (12), comments text)");
-
         debug.result = "created table!";
     } else
         debug.result = "table already exists";
