@@ -45,39 +45,61 @@
 
 <script type="text/ng-template" id="resources.html">
   <div widget-section-header>Choose a Staff Member</div>
-  <select class="form-control" ng-model="resourceId" ng-change="getStaffForResource()">
+  <select class="form-control" ng-model="appointment.resourceId" ng-change="getStaffForResource()">
     <option value="0">Health Services</option>
     <option value="1">Counselling Services</option>
     <option value="2">Professors and TAs</option>
   </select>
-  <select class="form-control" ng-model="staffName" ng-hide="resourceId === undefined">
+  <select class="form-control" ng-model="appointment.staffName" ng-hide="appointment.resourceId === undefined">
     <option value = "John Doe">John Doe</option>
     <option value="Jane Doe">Jane Doe</option>
     <option value="Stephen Harper">Stephen Harper</option>
   </select>
-  <div widget-item icon-right="icon-angle-right" ng-click="showTimeslots()" button ng-hide="staffName === undefined">
-        <div widget-text>Book an Appointment with {{staffName}}</div>
-        <div widget-sub-text>Click Here to view Time Slots</div>
+  <div widget-section-header>Timeslots</div>
+	<select class="form-control" ng-model="appointment.month">
+      <option value="0">January</option>
+      <option value="1">February</option>
+      <option value="2">March</option>
+      <option value="3">April</option>
+      <option value="4">May</option>
+      <option value="5">June</option>
+      <option value="6">July</option>
+      <option value="7">August</option>
+      <option value="8">September</option>
+      <option value="9">October</option>
+      <option value="10">November</option>
+      <option value="11">December</option>
+    </select>
+  	<select class="form-control" ng-model="appointment.day" ng-hide="appointment.month === undefined">
+      <option value="{{$index+1}}" ng-repeat="i in getNumber(31) track by $index">{{$index+1}}</option>
+    </select>
+    <select class="form-control" ng-model="appointment.time" ng-hide="appointment.day === undefined">
+      <option value="{{$index+1}}:00" ng-repeat="i in getNumber(24) track by $index">{{$index+1}}:00</option>
+    </select>
+  <input type="text" ng-model="appointment.comments" value="Nothing"/>
+    <div widget-item icon-right="icon-angle-right" ng-click="makeAppointment(appointment)" button>
+        <div widget-text>Book appointment</div>
+        <div widget-sub-text>Holder Text</div>
   </div>
 </script>
 
 <!-- View for the timeslot screen -->
 <script type="text/ng-template" id="timeslots.html">
-  	<div widget-section-header>Timeslots</div>
+      
+  
 </script>
 
 <!-- VIEWS FOR THE "DETAILS VIEWS EXAMPLE" -->
 
 <script type="text/ng-template" id="admin.html">
     <div widget-section-header>Admin Console</div>
-  	<div widget-item widget-text>Select faculty service: </div>
+  <div widget-item widget-text>Select faculty service: </div>
 	<select class="form-control" ng-model="resourceId" ng-change="getStaffForResource()">
       <option value="0">Health Services</option>
       <option value="1">Counselling Services</option>
       <option value="2">Professors and TAs</option>
     </select>
-<!-- THIS IS WHAT I ADDED *********************************-->
-    <select class="form-control" ng-model="staffName" ng-hide="resourceId === undefined">
+        <select class="form-control" ng-model="staffName" ng-hide="resourceId === undefined">
       <option value = "John Doe">John Doe</option>
       <option value="Jane Doe">Jane Doe</option>
       <option value="Stephen Harper">Stephen Harper</option>
@@ -89,8 +111,8 @@
 </script>
 
 <script type="text/ng-template" id="view3.html">
-    <div widget-section-header>View 3</div>
+    <div widget-section-header>Schedule</div>
     <div widget-item>
-        <div widget-text>This view is displayed in column 3</div>
+        <div widget-text>This view is the schedule of appointments</div>
     </div>
 </script>
