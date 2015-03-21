@@ -14,8 +14,8 @@ function getData() {
 function getAppointmentsForUserId() {
   //Todo: hide bookings in the past
     var userId = args.Get("userId");
-  var state = args.Get("state");
-    var queryResult = db.Execute('SELECT * FROM Appointments WHERE userId = ' + userId + ' AND  state = ' + state);
+  var state = args.Get("status");
+    var queryResult = db.Execute('SELECT * FROM Appointments WHERE studentId = ' + userId + ' AND status = ' + state);
     var rows = JSON.parse(queryResult);
     if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
         return '{"error":"No results"}';
@@ -26,8 +26,8 @@ function getAppointmentsForUserId() {
 // Retreive data from the database for a given faculty ID
 function getAppointmentsForFacultyId() {
   var ressourceId = args.Get("ressourceId");
-  var state = args.Get("state");
-    var queryResult = db.Execute('SELECT * FROM Appointments WHERE facultyId = ' + userId + ' AND  state = ' + state);
+  var state = args.Get("status");
+    var queryResult = db.Execute('SELECT * FROM Appointments WHERE staffId = ' + userId + ' AND  status = ' + state);
     var rows = JSON.parse(queryResult);
     if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
         return '{"error":"No results"}';
@@ -37,9 +37,9 @@ function getAppointmentsForFacultyId() {
 
 // Retreive data from the database for a given faculty ID
 function setState() {
-    var Id = args.Get("Id");
-  var state = args.Get("state");
-    var queryResult = db.Execute('UPDATE Appointments SET state = ' + state + ' WHERE _id = '+ Id);
+    var Id = args.Get("appointmentId");
+  var state = args.Get("status");
+    var queryResult = db.Execute('UPDATE Appointments SET status = ' + state + ' WHERE appointmentId = '+ Id);
     var rows = JSON.parse(queryResult);
     if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
         return '{"error":"No results"}';
