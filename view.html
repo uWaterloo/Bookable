@@ -35,18 +35,10 @@
         </div>
     </div>
     <!-- DETAILS VIEWS EXAMPLE -->
-
-<<<<<<< HEAD
-    <div widget-section-header>Details View Example</div>
-    <div widget-item icon-right="icon-angle-right" ng-click="showAdmin()" button>
-        <div widget-text>This view is displayed in column 1</div>
-        <div widget-sub-text>Click here to show view 2 in column 2</div>
-=======
     <div widget-section-header>Administration Console</div>
     <div widget-item icon-right="icon-angle-right" ng-click="showAdmin()" button>
         <div widget-text>Administration Console</div>
         <div widget-sub-text>Holder Text</div>
->>>>>>> design
     </div>
 
     <!-- OPEN DATA API EXAMPLE -->
@@ -110,6 +102,7 @@
 </script>
 
 <script type="text/ng-template" id="resources.html">
+  <div widget-section-header>Choose a Staff Member</div>
   <select class="form-control" ng-model="resourceId" ng-change="getStaffForResource()">
     <option value="0">Health Services</option>
     <option value="1">Counselling Services</option>
