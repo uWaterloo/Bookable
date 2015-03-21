@@ -15,7 +15,7 @@ function getAppointmentsForUserId() {
   //Todo: hide bookings in the past
     var userId = args.Get("userId");
   var state = args.Get("status");
-    var queryResult = db.Execute('SELECT * FROM Appointments WHERE studentId = ' + userId + ' AND status = ' + state);
+    var queryResult = db.Execute('SELECT * FROM Appointments WHERE studentId = @currentUser AND status = ' + state);
     var rows = JSON.parse(queryResult);
     if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
         return '{"error":"No results"}';
