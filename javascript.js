@@ -36,7 +36,7 @@ angular.module('PortalApp')
             $scope.getDbData();
         });
     }
-
+    
     // Insert a value into the database
     $scope.insertData = function () {
         if ($scope.insertValue.value.length > 50)
@@ -47,7 +47,10 @@ angular.module('PortalApp')
             });
         }
     };
-
+$scope.number = 5;
+$scope.getNumber = function(num) {
+    return new Array(num);   
+}
   
   	// Supporting functions for bookings
   	$scope.getAppointments = function(){
