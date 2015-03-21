@@ -71,21 +71,26 @@ $scope.getNumber = function(num) {
         });
     };
   
-  	$scope.makeAppointment = function(){
+  	$scope.makeAppointment = function(app){
+      var date = "2015-" + app.month +"-"+ app.day;
       	//Create appointment JSON
       	var appointment = {
-          	userName: $scope.student.FirstName + " " + $scope.student.LastName,
-          	userId: $scope.student.UserId,
-          	dateTime: this.dateTime,
-          	resourceId: $scope.resourceId,
-          	resourceName: this.resourceName,
-          	staffName: $scope.staffName,
-          	staffId: this.staffId,
-          	status: 0          	
+          	studentName: $scope.student.FirstName + " " + $scope.student.LastName,
+          	studentId: $scope.student.UserId,
+          	date_Day: date,
+          	date_Time: app.time,
+          	resourceId: app.resourceId,
+          	resourceName: "Something",
+          	staffName: app.staffName,
+          	staffId: "-1",
+          	status: 0 ,
+          	comments: app.comments
         }
+        console.log(appointment);
         //Save the appointment
         $scope.portalHelpers.invokeServerFunction("makeAppointment", appointment)
-        .then(function(){});
+        .then(function(log){
+        console.log(log)});
     };
   
   	// Get Student info
@@ -108,7 +113,8 @@ $scope.getNumber = function(num) {
         $scope.portalHelpers.showView('resources.html', 2);
     }
     
-    $scope.showTimeslots = function () {
+    $scope.showTimeslots = function (app) {
+      $scope.appointment = app;
         $scope.portalHelpers.showView('timeslots.html', 2);
     }
 
