@@ -35,10 +35,11 @@
         </div>
     </div>
     <!-- DETAILS VIEWS EXAMPLE -->
-    <div widget-section-header>Administration Console</div>
+
+    <div widget-section-header>Details View Example</div>
     <div widget-item icon-right="icon-angle-right" ng-click="showAdmin()" button>
-        <div widget-text>Administration Console</div>
-        <div widget-sub-text>Holder Text</div>
+        <div widget-text>This view is displayed in column 1</div>
+        <div widget-sub-text>Click here to show view 2 in column 2</div>
     </div>
 
     <!-- OPEN DATA API EXAMPLE -->
@@ -60,78 +61,25 @@
             <div widget-text>{{::l.Item1}}</div>
         </div>
     </div>
-</script>
-<!-- Bookings HTML (List of current appointments) -->
 
-<script type="text/ng-template" id="bookings.html">
-  <div widget-section-header>Your Appointments</div>
-  <div widget-item>
-    <div class="approvedAppointments" ng-show="approvedAppointments.length">
-      <p>Approved Appointments</p>
-      <div ng-repeat="appointment in approvedAppointments">
-        <p>Appointment with {{appointment.staffName}} on {{appointment.dateTime}}</p>
-      </div>
-    </div>
-    <div class="pendingAppointments" ng-show="pendingAppointments.length">
-      <p>Pending Appointments</p>
-      <div ng-repeat="appointment in pendingAppointments">
-        <p>Appointment with {{appointment.staffName}} on {{appointment.dateTime}}</p>
-      </div>
-    </div>
-    <div class="rejectedAppointments" ng-show="rejectedAppointments.length">
-      <p>Rejected Appointments</p>
-      <div ng-repeat="appointment in rejectedAppointments">
-        <p>Appointment with {{appointment.staffName}} on {{appointment.dateTime}}</p>
-      </div>
-    </div>
-    <div class="noAppointments" ng-hide="approvedAppointments.length || pendingAppointments.length || rejectedAppointments.length">
-      <p>You don't have any appointments! You can book one below.</p>
-    </div>
-    <div widget-section-header>Book An Appointment</div>
-    <div widget-item icon-right="icon-angle-right" ng-click="showResources()" button>
-        <div widget-text>Choose a Staff</div>
-        <div widget-sub-text>Holder Text</div>
-    </div>
-    <div widget-section-header>Administration Console</div>
-    <div widget-item icon-right="icon-angle-right" ng-click="showAdmin()" button>
-        <div widget-text>Administration Console</div>
-        <div widget-sub-text>Holder Text</div>
-    </div>
+    <!-- CSS EXAMPLE -->
 
-  </div>
+    <div widget-section-header>CSS test</div>
+    <div widget-item>
+        <span id="cssTest">This is a CSS test</span>
+    </div>
 </script>
 
-<script type="text/ng-template" id="resources.html">
-  <div widget-section-header>Choose a Staff Member</div>
-  <select class="form-control" ng-model="resourceId" ng-change="getStaffForResource()">
-    <option value="0">Health Services</option>
-    <option value="1">Counselling Services</option>
-    <option value="2">Professors and TAs</option>
-  </select>
-  <select class="form-control" ng-model="staffName" ng-hide="resourceId === undefined">
-    <option value = "John Doe">John Doe</option>
-    <option value="Jane Doe">Jane Doe</option>
-    <option value="Stephen Harper">Stephen Harper</option>
-  </select>
-  <div widget-item icon-right="icon-angle-right" ng-click="showTimeslots()" button ng-hide="staffName === undefined">
-        <div widget-text>Book an Appointment with {{staffName}}</div>
-        <div widget-sub-text>Holder Text</div>
-  </div>
-</script>
-<!-- View for the timeslot screen -->
-<script type="text/ng-template" id="timeslots.html">
-  	<div widget-section-header>Timeslots</div>
-</script>
-
-<!-- Views for the Admin Console -->
+<!-- VIEWS FOR THE "DETAILS VIEWS EXAMPLE" -->
 
 <script type="text/ng-template" id="admin.html">
     <div widget-section-header>Admin Console</div>
   	<div widget-item widget-text>Select faculty service:
-	<select class="form-control" ng-model="resourceId" ng-change="getStaffForResource()">
-      <option value="0">Health Services</option>
-      <option value="1">Counselling Services</option>
-      <option value="2">Professors and TAs</option>
+	<select>
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
     </select>
       </div>
     <div widget-item icon-right="icon-angle-right" ng-click="showView3()" button>
