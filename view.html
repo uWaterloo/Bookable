@@ -70,24 +70,27 @@
     <div class="approvedAppointments" ng-show="approvedAppointments.length">
       <p>Approved Appointments</p>
       <div ng-repeat="appointment in approvedAppointments">
+        <p>Appointment with {{appointment.staffName}} on {{appointment.dateTime}}</p>
       </div>
     </div>
     <div class="pendingAppointments" ng-show="pendingAppointments.length">
       <p>Pending Appointments</p>
       <div ng-repeat="appointment in pendingAppointments">
+        <p>Appointment with {{appointment.staffName}} on {{appointment.dateTime}}</p>
       </div>
     </div>
     <div class="rejectedAppointments" ng-show="rejectedAppointments.length">
       <p>Rejected Appointments</p>
       <div ng-repeat="appointment in rejectedAppointments">
+        <p>Appointment with {{appointment.staffName}} on {{appointment.dateTime}}</p>
       </div>
     </div>
     <div class="noAppointments" ng-hide="approvedAppointments.length || pendingAppointments.length || rejectedAppointments.length">
       <p>You don't have any appointments! You can book one below.</p>
     </div>
     <div widget-section-header>Book An Appointment</div>
-    <div widget-item icon-right="icon-angle-right" ng-click="showTimeslots()" button>
-        <div widget-text>Book an Appointment</div>
+    <div widget-item icon-right="icon-angle-right" ng-click="showResources()" button>
+        <div widget-text>Choose a Staff</div>
         <div widget-sub-text>Holder Text</div>
     </div>
     <div widget-section-header>Administration Console</div>
@@ -99,6 +102,22 @@
   </div>
 </script>
 
+<script type="text/ng-template" id="resources.html">
+  <select class="form-control" ng-model="resourceId" ng-change="getStaffForResource()">
+    <option value="0">Health Services</option>
+    <option value="1">Counselling Services</option>
+    <option value="2">Professors and TAs</option>
+  </select>
+  <select class="form-control" ng-model="staffName" ng-hide="resourceId === undefined">
+    <option value = "John Doe">John Doe</option>
+    <option value="Jane Doe">Jane Doe</option>
+    <option value="Stephen Harper">Stephen Harper</option>
+  </select>
+  <div widget-item icon-right="icon-angle-right" ng-click="showTimeslots()" button ng-hide="staffName === undefined">
+        <div widget-text>Book an Appointment with {{staffName}}</div>
+        <div widget-sub-text>Holder Text</div>
+  </div>
+</script>
 <!-- View for the timeslot screen -->
 <script type="text/ng-template" id="timeslots.html">
   	<div widget-section-header>Timeslots</div>
@@ -110,7 +129,7 @@
     <div widget-section-header>Admin Console</div>
   	<div widget-item widget-text>Select faculty service:
 	<select>
-      <option value="volvo">Volvo</option>
+      <option value="Health Services">Volvo</option>
       <option value="saab">Saab</option>
       <option value="mercedes">Mercedes</option>
       <option value="audi">Audi</option>
