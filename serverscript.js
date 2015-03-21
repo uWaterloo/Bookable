@@ -64,7 +64,7 @@ function createTable() {
     var row = JSON.parse(queryResult);
 
     if (row.length > 0 && typeof row[0].Error != 'undefined') {
-        db.Execute('CREATE TABLE sampleTable(id INTEGER PRIMARY KEY IDENTITY(1,1), userId nvarchar(50), value nvarchar(50));');
+        db.Execute("CREATE TABLE Appointments ( appointmentId INTEGER PRIMARY KEY IDENTITY(1,1), status INTEGER, date_time DATETIME,studentId VARCHAR (12), studentName VARCHAR (60), ressourceId VARCHAR (25), ressourceName VARCHAR (25), staffName VARCHAR (60), staffId VARCHAR (12), comments text)");
         debug.result = "created table!";
     } else
         debug.result = "table already exists";
