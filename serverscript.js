@@ -48,7 +48,7 @@ function setStatus() {
 }
 // Make appointment
 function makeAppointment() {
-    var queryResult = db.Execute("INSERT INTO Appointments VALUES(0, @date, @day, @currentUser, @studentName, -1, @ressourceName', @staffName, '-1', @comments)");
+    var queryResult = db.Execute("INSERT INTO Appointments VALUES(0, GETDATE(), @currentUser, @studentName, -1, @ressourceName', @staffName, '-1', @comments)");
     var rows = JSON.parse(queryResult);
     if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
         return '{"error":"No results"}';
@@ -74,7 +74,7 @@ function createTable() {
     var row = JSON.parse(queryResult);
 
     if (row.length > 0 && typeof row[0].Error != 'undefined') {
-        db.Execute("CREATE TABLE Appointments ( appointmentId INTEGER PRIMARY KEY IDENTITY(1,1), status INTEGER,date_day DATE,date_time TIME,studentId VARCHAR (12), studentName VARCHAR (60), resourceId VARCHAR (25), resourceName VARCHAR (25), staffName VARCHAR (60), staffId VARCHAR (12), comments text)");
+        db.Execute("CREATE TABLE Appointments ( appointmentId INTEGER PRIMARY KEY IDENTITY(1,1), status INTEGER,date_day VARCHAR(10),date_time TIME,studentId VARCHAR (12), studentName VARCHAR (60), resourceId VARCHAR (25), resourceName VARCHAR (25), staffName VARCHAR (60), staffId VARCHAR (12), comments text)");
         debug.result = "created table!";
     } else
         debug.result = "table already exists";
