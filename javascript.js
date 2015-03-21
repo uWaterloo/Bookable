@@ -6,7 +6,7 @@ angular.module('PortalApp')
 
     // Widget Configuration
     $scope.portalHelpers.config = {
-        "title": "Bookable",
+        "title": "Test Project",
         "icon": "icon-bell"
     };
 
@@ -47,56 +47,8 @@ angular.module('PortalApp')
             });
         }
     };
-  
-  	// Supporting functions for bookings
-  	$scope.getAppointments = function(){
-     	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", $scope.student.UserId, 0)
-        .then(function(appointments){
-        	$scope.pendingAppointments = appointments;
-          	console.log($scope.pendingAppointments);
-        });
-      	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", $scope.student.UserId, 1)
-        .then(function(appointments){
-        	$scope.rejectedAppointments = appointments;
-          	console.log($scope.rejectedAppointments);
-        });
-      	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", $scope.student.UserId, 2)
-        .then(function(appointments){
-        	$scope.approvedAppointments = appointments;
-          	console.log($scope.approvedAppointments);
-        });
-    };
-  
-  	$scope.makeAppointment = function(){
-      	//Create appointment JSON
-      	var appointment = {
-          	userName: $scope.student.FirstName + " " + $scope.student.LastName,
-          	userId: $scope.student.UserId,
-          	dateTime: this.dateTime,
-          	resourceId: $scope.resourceId,
-          	resourceName: this.resourceName,
-          	staffName: $scope.staffName,
-          	staffId: this.staffId,
-          	status: 0          	
-        }
-        //Save the appointment
-        $scope.portalHelpers.invokeServerFunction("makeAppointment", appointment)
-        .then(function(){});
-    };
-  
-  	// Get Student info
-  	$http.get("/Develop/GetStudentInfo", {}).then(function(student){
-      	$scope.student = student.data.Data;
-      	console.log($scope.student);
-      	$scope.getAppointments();
-    });
-  	
-  	$http.get("/Develop/GetStudentAcademicInfo", {}).then(function(studentAcademic){
-      	$scope.studentAcademic = studentAcademic;
-      	console.log($scope.studentAcademic);
-    });   	
 
-    // Views
+    // DETAILS VIEW EXAMPLE
     $scope.showAdmin = function () {
         $scope.portalHelpers.showView('admin.html', 2);
     }
@@ -104,15 +56,6 @@ angular.module('PortalApp')
     $scope.showView3 = function () {
         $scope.portalHelpers.showView('view3.html', 3);
     }
-    $scope.showResources = function() {
-      	$scope.portalHelpers.showView('resources.html', 2);
-    }
-
-    
-    $scope.showTimeslots = function() {
-      	$scope.portalHelpers.showView('timeslots.html', 3);
-    }
-    
 
     // PORTAL DATA SOURCE EXAMPLE
 
@@ -123,7 +66,7 @@ angular.module('PortalApp')
         // Turn off loading animation
         $scope.portalHelpers.toggleLoading(false);
         // Show main view
-        $scope.portalHelpers.showView('bookings.html', 1);
+        $scope.portalHelpers.showView('main.html', 1);
     });
 
     // OPEN API EXAMPLE
