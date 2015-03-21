@@ -49,7 +49,7 @@ angular.module('PortalApp')
     };
 
     // DETAILS VIEW EXAMPLE
-    $scope.showView2 = function () {
+    $scope.showAdmin = function () {
         $scope.portalHelpers.showView('admin.html', 2);
     }
 
