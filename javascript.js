@@ -104,6 +104,11 @@ angular.module('PortalApp')
     $scope.showResources = function () {
         $scope.portalHelpers.showView('resources.html', 2);
     }
+    
+    $scope.showTimeslots = function () {
+        $scope.portalHelpers.showView('timeslots.html', 2);
+    }
+
 
     $scope.showView3 = function () {
         $scope.portalHelpers.showView('view3.html', 3);
