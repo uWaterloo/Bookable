@@ -27,7 +27,7 @@ function getAppointmentsForUserId() {
 function getAppointmentsForFacultyId() {
   var ressourceId = args.Get("ressourceId");
   var state = args.Get("status");
-    var queryResult = db.Execute('SELECT * FROM Appointments WHERE staffId = ' + staffId + ' AND  status = ' + state);
+    var queryResult = db.Execute('SELECT * FROM Appointments WHERE status = ' + state);
     var rows = JSON.parse(queryResult);
     if (rows.length > 0 && typeof rows[0].Error != 'undefined') {
         return '{"error":"No results"}';

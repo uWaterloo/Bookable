@@ -72,15 +72,15 @@ $scope.getNumber = function(num) {
     };
   
     // Supporting functions for bookings
-  	$scope.getAppointments = function(){
+  	$scope.getAdminAppointments = function(){
      	$scope.portalHelpers.invokeServerFunction("getAppointmentsForFacultyId", {userId:$scope.student.UserId, status:0})
         .then(function(appointments){
-        	$scope.pendingAppointments = appointments;
+        	$scope.pendingAdminAppointments = appointments;
           	console.log($scope.pendingAppointments);
         });
       	$scope.portalHelpers.invokeServerFunction("getAppointmentsForFacultyId", {userId:$scope.student.UserId, status:2})
         .then(function(appointments){
-        	$scope.approvedAppointments = appointments;
+        	$scope.approvedAdminAppointments = appointments;
           	console.log($scope.approvedAppointments);
         });
     };

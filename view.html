@@ -113,6 +113,11 @@
 <script type="text/ng-template" id="view3.html">
     <div widget-section-header>Schedule</div>
     <div widget-item>
-        <div widget-text>This view is the schedule of appointments</div>
+     <div ng-repeat="appointment in pendingAdminAppointments">		
+        <p>Appointment with {{appointment.studentName}} on {{appointment.dateTime}}</p>		
+      </div>
+	 <div ng-repeat="appointment in approvedAdminAppointments">		
+        <p>Appointment with {{appointment.studentName}} on {{appointment.dateTime}}</p>		
+      </div>
     </div>
 </script>
