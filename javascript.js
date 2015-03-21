@@ -51,7 +51,18 @@ $scope.number = 5;
 $scope.getNumber = function(num) {
     return new Array(num);   
 }
+$scope.availableTimes = function(){
+  $scope.allTimes = [9,10,11,12,13,14,15,16];
+  //console.log($scope.allTimes);
+  //$scope.portalHelpers.invokeServerFunction("getOccupiedTimeSlots", {date:"2015-"+$scope.appointment.month+"-"+scope.appointment.day, staffName:appointment.staffName}) 
+  //.then(function(occupiedTimes){
+  //  console.log(occupiedTimes);
+  //});
   
+}
+
+$scope.availableTimes();
+$scope.$watch(function(scope){return scope.appointment}, function(newValue, oldValue){$scope.availableTimes});
   	// Supporting functions for bookings
   	$scope.getAppointments = function(){
      	$scope.portalHelpers.invokeServerFunction("getAppointmentsForUserId", {userId:$scope.student.UserId, status:0})
@@ -71,26 +82,23 @@ $scope.getNumber = function(num) {
         });
     };
   
-  	$scope.makeAppointment = function(app){
-      var date = "2015-" + app.month +"-"+ app.day;
+  	$scope.makeAppointment = function(){
       	//Create appointment JSON
       	var appointment = {
-          	studentName: $scope.student.FirstName + " " + $scope.student.LastName,
-          	studentId: $scope.student.UserId,
-          	date_Day: date,
-          	date_Time: app.time,
-          	resourceId: app.resourceId,
-          	resourceName: "Something",
-          	staffName: app.staffName,
-          	staffId: "-1",
-          	status: 0 ,
-          	comments: app.comments
+          	userName: $scope.student.FirstName + " " + $scope.student.LastName,
+          	userId: $scope.student.UserId,
+          	dateTime: this.dateTime,
+          	resourceId: $scope.resourceId,
+          	resourceName: this.resourceName,
+          	staffName: $scope.staffName,
+          	staffId: this.staffId,
+          	status: 0          	
         }
-        console.log(appointment);
         //Save the appointment
         $scope.portalHelpers.invokeServerFunction("makeAppointment", appointment)
-        .then(function(log){
-        console.log(log)});
+        .then(function(){
+        	$scope.portalHelpers.closeLastView();
+        });
     };
   
   	// Get Student info
@@ -113,8 +121,7 @@ $scope.getNumber = function(num) {
         $scope.portalHelpers.showView('resources.html', 2);
     }
     
-    $scope.showTimeslots = function (app) {
-      $scope.appointment = app;
+    $scope.showTimeslots = function () {
         $scope.portalHelpers.showView('timeslots.html', 2);
     }
 
